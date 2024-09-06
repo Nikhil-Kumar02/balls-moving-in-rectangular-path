@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangular Path</title>
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .container{
+            height: 100vh;
+            width: 100vw;
+            border: 3px solid black;
+            background-color: bisque;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .circles{
+            height: 650px;
+            width: 650px;
+            background-color:darkslategrey;
+            border: 5px solid crimson;
+            position: relative;
+        }
+        .ball{
+            height: 75px;
+            width: 75px;
+            border: 3px solid gold;
+            border-radius: 50%;
+            margin: 5px;
+            padding: 5px;
+        }
+        #textStyle{
+            font-style: normal;
+            font-size: 50px;
+            text-align: center;
+            color: floralwhite;
+        }
+        #ball1{
+            background-color: chocolate;
+            position: relative;
+            animation: top-left-right 4s linear 1s infinite normal both;
+        }
+        /* To get the correct position of balls see the wall where we are going */
+        @keyframes top-left-right {
+            0%{
+                top: 0px; 
+                left: 0px;
+                transform: rotate(0deg);
+            } 
+            25%{
+                top: 0px;
+                left: 560px; 
+                transform: rotate(90deg);
+            }
+            50%{
+                top: 560px;  
+                left: 560px;
+                transform: rotate(180deg);
+            } 
+            75%{
+                top: 560px;
+                left: 0px; 
+                transform: rotate(270deg);
+            }
+            100%{
+                top: 0px; 
+                left: 0px;
+                transform: rotate(360deg);
+            }
+        }
+        #ball2{
+            background-color: chartreuse;
+            position: absolute;
+            animation: top-right-bottom 4s linear 1s infinite normal both;
+        }
+        @keyframes top-right-bottom {
+            0%{
+                top: 0px;
+                right: 0px;
+                transform: rotate(0deg);
+            }   
+            25%{
+                top: 560px;
+                right: 0px;
+                transform: rotate(90deg);
+            }
+            50%{
+                top: 560px;
+                right: 560px;
+                transform: rotate(180deg);
+            }
+            75%{
+                top: 0px;
+                right: 560px;
+                transform: rotate(270deg);
+            }
+            100%{
+                top: 0px;
+                right: 0px;
+                transform: rotate(360deg);
+            }
+        }
+        #ball3{
+            background-color: cadetblue;
+            position: absolute;
+            animation: bottom-right-left 4s linear 1s infinite normal both;
+        }
+        @keyframes bottom-right-left {
+            0%{
+                bottom: 0px;
+                right: 0px;
+                transform: rotate(0deg);
+            }
+            25%{
+                bottom: 0px;
+                right: 560px;
+                transform: rotate(90deg);
+            }
+            50%{
+                bottom: 560px;
+                right: 560px;
+                transform: rotate(180deg);
+            }
+            75%{
+                bottom: 560px;
+                right: 0px;
+                transform: rotate(270deg);
+            }
+            100%{
+                bottom: 0px;
+                right: 0px;
+                transform: rotate(360deg);
+            }
+        }
+
+        #ball4{
+            background-color: rgb(182, 47, 182);
+            position: absolute;
+            animation: bottom-left-top 4s linear 1s infinite normal both;
+        }
+        @keyframes bottom-left-top {
+            0%{
+                left: 0px;
+                bottom: 0px;
+                transform: rotate(0deg);
+            }
+            25%{
+                left: 0px;
+                bottom: 560px;
+                transform: rotate(90deg);
+            }
+            50%{
+                left: 560px;
+                bottom: 560px;
+                transform: rotate(180deg);
+            }
+            75%{
+                left: 560px;
+                bottom: 0px;
+                transform: rotate(270deg);
+            }
+            100%{
+                left: 0px;
+                bottom: 0px;
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circles">
+            <div class="ball" id="ball1"><p id="textStyle"> 1 </p></div>
+            <div class="ball" id="ball2"><p id="textStyle"> 2 </p></div>
+            <div class="ball" id="ball3"><p id="textStyle"> 3 </p></div>
+            <div class="ball" id="ball4"><p id="textStyle"> 4 </p></div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!-- Detailed Explaination -->
+ 
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Container to hold the animation */
+        .container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border: 2px solid #333;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        /* Common style for all circles */
+        .circle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            border-radius: 50%;
+            animation: moveInRectangle 4s linear infinite;
+        }
+
+        /* Specific styles and animations for each circle */
+        .circle1 {
+            top: 0;
+            left: 0;
+            animation-name: moveTopLeft;
+        }
+
+        .circle2 {
+            top: 0;
+            right: 0;
+            animation-name: moveTopRight;
+        }
+
+        .circle3 {
+            bottom: 0;
+            right: 0;
+            animation-name: moveBottomRight;
+        }
+
+        .circle4 {
+            bottom: 0;
+            left: 0;
+            animation-name: moveBottomLeft;
+        }
+
+        /* Keyframes for the first circle (starting from top-left corner) */
+        @keyframes moveTopLeft {
+            0% {
+                top: 0;
+                left: 0; /* Start at top-left corner */
+            }
+            25% {
+                top: 0;
+                left: 250px; /* Move to top-right corner */
+            }
+            50% {
+                top: 150px;
+                left: 250px; /* Move to bottom-right corner */
+            }
+            75% {
+                top: 150px;
+                left: 0; /* Move to bottom-left corner */
+            }
+            100% {
+                top: 0;
+                left: 0; /* Return to top-left corner */
+            }
+        }
+
+        /* Keyframes for the second circle (starting from top-right corner) */
+        @keyframes moveTopRight {
+            0% {
+                top: 0;
+                right: 0; /* Start at top-right corner */
+            }
+            25% {
+                top: 150px;
+                right: 0; /* Move to bottom-right corner */
+            }
+            50% {
+                top: 150px;
+                right: 250px; /* Move to bottom-left corner */
+            }
+            75% {
+                top: 0;
+                right: 250px; /* Move to top-left corner */
+            }
+            100% {
+                top: 0;
+                right: 0; /* Return to top-right corner */
+            }
+        }
+
+        /* Keyframes for the third circle (starting from bottom-right corner) */
+        @keyframes moveBottomRight {
+            0% {
+                bottom: 0;
+                right: 0; /* Start at bottom-right corner */
+            }
+            25% {
+                bottom: 0;
+                right: 250px; /* Move to bottom-left corner */
+            }
+            50% {
+                bottom: 150px;
+                right: 250px; /* Move to top-left corner */
+            }
+            75% {
+                bottom: 150px;
+                right: 0; /* Move to top-right corner */
+            }
+            100% {
+                bottom: 0;
+                right: 0; /* Return to bottom-right corner */
+            }
+        }
+
+        /* Keyframes for the fourth circle (starting from bottom-left corner) */
+        @keyframes moveBottomLeft {
+            0% {
+                bottom: 0;
+                left: 0; /* Start at bottom-left corner */
+            }
+            25% {
+                bottom: 150px;
+                left: 0; /* Move to top-left corner */
+            }
+            50% {
+                bottom: 150px;
+                left: 250px; /* Move to top-right corner */
+            }
+            75% {
+                bottom: 0;
+                left: 250px; /* Move to bottom-right corner */
+            }
+            100% {
+                bottom: 0;
+                left: 0; /* Return to bottom-left corner */
+            }
+        }
+    </style>
+    <title>Rectangular Path Animation</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+    <div class="circle circle4"></div>
+</div>
+
+</body>
+</html>
+
+
+-->
